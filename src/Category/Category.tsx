@@ -50,7 +50,7 @@ const Category = () => {
       <>
         <Container>
           <TitleBox>
-            <Title>카테고리 관리</Title>
+            <Title>카테고리 관리(develop)</Title>
             <UnderLine />
           </TitleBox>
           <ContentBox>
