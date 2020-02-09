@@ -72,6 +72,14 @@ function SettingBox({ categories, onSave }) {
         })
     }
     const orderChange = (item, type) => {
+        if((item.order===1 && type)||item.order===subMenu.category.length && !type) return;
+        if(type&&subMenu.category[item.order-2].id===item.parent_id){
+            return alert('같은 그룹끼리만 이동가능');
+        }
+        if(!type&&subMenu.category[item.order].id.length<item.id.length){
+            return alert('같은 그룹끼리만 이동가능');
+        }
+        let parentList = subMenu.category.filter(list => list.parent_id === item.id);
         setSubMenu({ category: MoveDown(subMenu.category, item, type) })
     }
     const onAdd = (id) => {
@@ -113,6 +121,7 @@ function SettingBox({ categories, onSave }) {
         //     }
         // })
     }
+
     const onRemove = (id) => {
         console.log(id);
         if (window.confirm('하위목록 다삭제됨')) {
