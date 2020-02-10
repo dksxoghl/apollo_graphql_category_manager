@@ -173,6 +173,7 @@ function SettingBox({ categories, onSave }) {
                 }
             })
             setDeleteId(deleteId.concat(id));
+            setInsertId(insertId.filter(insertId =>insertId.slice(0, id.length) !== id))
         } else {
         }
     }

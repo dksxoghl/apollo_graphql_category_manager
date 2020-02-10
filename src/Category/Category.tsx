@@ -49,8 +49,8 @@ const Category = () => {
      return changedList.filter(item=>item.id===id);
     })
     console.log(insertList);
-    deleteId.map(id => erase({ variables: { id: id } }));
     insertList.map(list=> insert({variables: { id: list[0].id, name: list[0].name, parent_id: list[0].parent_id, order: list[0].order,status:list[0].status }}))
+    deleteId.map(id => erase({ variables: { id: id } }));
     // if (deleteId.length === 1 && changedList.length === categories.length) {
       changedList.map(list => {
         save({ variables: { id: list.id, name: list.name, parent_id: list.parent_id, order: list.order,status:list.status } })
