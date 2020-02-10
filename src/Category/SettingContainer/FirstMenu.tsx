@@ -38,7 +38,7 @@ function FirstMenu({ parentList, subMenu, onAdd, onRemove, onHide, orderChange, 
                 //         console.log(a,menu);
                 //     return <div key={item.id}><FirstItem item={item} onAdd={onAdd} menu={menu} /></div>
                 // }
-                return <div key={item.id}><FirstItem item={item} onAdd={onAdd} onRemove={onRemove} onHide={onHide} orderChange={orderChange} updateName={updateName} addSub={addSub} /></div>
+                return <div key={item.id}><FirstItem item={item} onAdd={onAdd} onRemove={onRemove} onHide={onHide} orderChange={orderChange} updateName={updateName} addSub={addSub} subMenu={subMenu} /></div>
         }
         )
         // parentList.map((item => {

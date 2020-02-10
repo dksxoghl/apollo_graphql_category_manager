@@ -91,12 +91,12 @@ function SettingBox({ categories, onSave }) {
             if (!type && below[0].id.length < item.id.length) {             // 아래로갈때 다른 대 중분류일시 수정불가
                 return alert('같은 그룹끼리만 이동가능');
             }
-        }else{
+        } else {
             let parentList = subMenu.category.filter(list => list.parent_id === item.parent_id);
-            console.log(parentList,item);
-            let findIndex=parentList.indexOf(item);     
+            console.log(parentList, item);
+            let findIndex = parentList.indexOf(item);
             console.log(findIndex);
-            below=[parentList[findIndex-1]];
+            below = [parentList[findIndex - 1]];
             // let arr=item.id.split(':');                         
             // let findId= parseInt(arr[arr.length-1].slice(1,arr[arr.length-1].length))-1;  
             // let find= 'a'+findId;
@@ -132,7 +132,7 @@ function SettingBox({ categories, onSave }) {
                 return list;
             })
         })
-        
+
         // })
         // setSelectID(id);
         // menu.push( <FirstMenu parentList={parentList} onAdd={onAdd} />)
@@ -144,8 +144,8 @@ function SettingBox({ categories, onSave }) {
         setSubMenu({
             category: subMenu.category.map(list => {
                 let pId;
-                if(list.parent_id)
-                pId=list.parent_id.slice(0,id.length);
+                if (list.parent_id)
+                    pId = list.parent_id.slice(0, id.length);
                 if (id === pId) {
                     console.log(false);
                     return ({ ...list, status: 'hide' });
@@ -168,8 +168,8 @@ function SettingBox({ categories, onSave }) {
             subMenu.category.map((item) => {
                 if (id === item.id.slice(0, id.length)) { //선택된아이디랑 현재 상태에있는 목록아디 및 하위목록들 비교
                     console.log(item.id.slice(0, id.length))
-                    let childDelete=subMenu.category.filter(i => i.id.slice(0, id.length) !== id);
-                    setSubMenu({ category: NewOrder(childDelete)});                                     //order재정렬
+                    let childDelete = subMenu.category.filter(i => i.id.slice(0, id.length) !== id);
+                    setSubMenu({ category: NewOrder(childDelete) });                                     //order재정렬
                 }
             })
             setDeleteId(deleteId.concat(id));
@@ -250,9 +250,7 @@ function SettingBox({ categories, onSave }) {
     // m.push( <FirstMenu parentList={parentList} onAdd={onAdd} />)
     // let addChild =()=>{return <div>aa</div>}
 
-    let menu = <FirstMenu parentList={parentList} subMenu={subMenu.category} onAdd={onAdd} onRemove={onRemove} onHide={onHide} orderChange={orderChange} updateName={updateName}
-        addSub={addSub}
-    />;
+
     // const menu = () => {
     //     for (let index = 0; index < array.length; index++) {
     //         const element = array[index];
@@ -260,7 +258,7 @@ function SettingBox({ categories, onSave }) {
     //     }
     // }
     const handleClick = () => {
-        onSave(subMenu.category,deleteId,insertId);
+        onSave(subMenu.category, deleteId, insertId);
         setDeleteId([""]);
         setInsertId([""]);
     }
@@ -281,7 +279,9 @@ function SettingBox({ categories, onSave }) {
         setInsertId(insertId.concat(id));
     }
 
-
+    let menu = <FirstMenu parentList={parentList} subMenu={subMenu.category} onAdd={onAdd} onRemove={onRemove} onHide={onHide} orderChange={orderChange} updateName={updateName}
+        addSub={addSub}
+    />;
     return (
         <CBox>
             {/* <FirstMenu parentList={m.nodes} onAdd={onAdd} /> */}
