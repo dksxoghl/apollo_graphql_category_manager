@@ -13,10 +13,12 @@ import {
     ButtonBox
 } from "../styles";
 import { MoveDown } from './MoveDown';
+import NewOrder from './NewOrder';
 
 function SettingBox({ categories, onSave }) {
     const [selectID, setSelectID] = useState("");
     const [deleteId, setDeleteId] = useState([""]);
+    const [insertId, setInsertId] = useState([""]);
     let parentList = categories.filter(list => list.parent_id === null);
     const [subMenu, setSubMenu] = useState({
         // category: parentList
@@ -130,6 +132,7 @@ function SettingBox({ categories, onSave }) {
                 return list;
             })
         })
+        
         // })
         // setSelectID(id);
         // menu.push( <FirstMenu parentList={parentList} onAdd={onAdd} />)
@@ -140,7 +143,10 @@ function SettingBox({ categories, onSave }) {
         console.log(id);
         setSubMenu({
             category: subMenu.category.map(list => {
-                if (list.parent_id === id) {
+                let pId;
+                if(list.parent_id)
+                pId=list.parent_id.slice(0,id.length);
+                if (id === pId) {
                     console.log(false);
                     return ({ ...list, status: 'hide' });
                 }
@@ -162,15 +168,14 @@ function SettingBox({ categories, onSave }) {
             subMenu.category.map((item) => {
                 if (id === item.id.slice(0, id.length)) { //선택된아이디랑 현재 상태에있는 목록아디 및 하위목록들 비교
                     console.log(item.id.slice(0, id.length))
-                    setSubMenu({ category: subMenu.category.filter(i => i.id.slice(0, id.length) !== id) });
+                    let childDelete=subMenu.category.filter(i => i.id.slice(0, id.length) !== id);
+                    setSubMenu({ category: NewOrder(childDelete)});                                     //order재정렬
                 }
             })
             setDeleteId(deleteId.concat(id));
         } else {
         }
     }
-    console.log(deleteId);
-
     const addSub = (id) => {
         let parentList = subMenu.category.filter(list => list.parent_id === id);  //하위항목들구하고
         let newId = '';
@@ -211,12 +216,12 @@ function SettingBox({ categories, onSave }) {
         //     })
         // });
         setSubMenu({ category: [...addArr.slice(0, num), parent, ...addArr.slice(num, subMenu.category.length)] }); //객체를 배열 원하는위치안에 삽입
-
+        setInsertId(insertId.concat(newId));
 
     }
     //전체객체관리 
     useEffect(() => {
-        let parentList = categories.filter(list => list.parent_id === selectID);
+        let parentList = subMenu.category.filter(list => list.parent_id === null);
 
         // if (parentList.length > 1) {
         //     let b = true;     //이미 추가된 목록이라면 추가불가
@@ -255,7 +260,9 @@ function SettingBox({ categories, onSave }) {
     //     }
     // }
     const handleClick = () => {
-        onSave(deleteId);
+        onSave(subMenu.category,deleteId,insertId);
+        setDeleteId([""]);
+        setInsertId([""]);
     }
     const addParent = () => {
         const parentList = subMenu.category.filter(list => list.parent_id === null);
@@ -271,6 +278,7 @@ function SettingBox({ categories, onSave }) {
 
         }
         setSubMenu({ category: subMenu.category.concat(parent) });
+        setInsertId(insertId.concat(id));
     }
 
 

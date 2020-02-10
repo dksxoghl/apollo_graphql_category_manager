@@ -22,22 +22,6 @@ function FirstMenu({ parentList, subMenu, onAdd, onRemove, onHide, orderChange, 
     //     })
     // }
 
-
-    // const onAdd = (id) => {
-    //     console.log(id);
-
-    //     const { loading, error, data } = useQuery(GET_SUBCATEGORY);
-    //     if (loading) return <p>'Loading...'</p>;
-    //     if (error) return <p>`Error! ${error.message}`</p>;
-    //     else {
-    //         const sub = data.categories;
-    //         const menu = <FirstMenu parentList={sub} subMenu={sub} onAdd={onAdd} />;
-    //         return (
-    //           {menu}
-    //         );
-    //     }
-    // }
-
     //setstate tsx물보기
     return (
         subMenu.map(item => {
