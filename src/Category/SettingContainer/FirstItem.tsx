@@ -3,13 +3,20 @@ import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 import { GET_SUBCATEGORY } from '../../graphql/graphql';
 import FirstMenu from './FirstMenu';
 import { Box } from './styles'
-function FirstItem({ item, onAdd, onHide, onRemove, orderChange, updateName, addSub, subMenu }) {
+import plusImg from '../img/plus.png';
+import end from '../img/end.png';
+import minusImg from '../img/minus.png';
+function FirstItem({ item, onAdd, onHide, onRemove, orderChange, updateName, addSub, subMenu ,changeRight,current,setCurrent,imgStatus}) {
   const [input, setInput] = useState(false);
   const [value, setValue] = useState('');
+  const [clicked,setClicked] = useState(imgStatus==='+'? true:false);             // 이미지 결정 state
+  
   const handleClick = () => {
+    setClicked(false);
     onAdd(item.id);
   }
   const handleHide = () => {
+    setClicked(true);
     onHide(item.id);
   }
   const handleRemove = () => {
@@ -48,6 +55,10 @@ function FirstItem({ item, onAdd, onHide, onRemove, orderChange, updateName, add
   const handleAddSub = () => {
     addSub(item.id);
   }
+  const boxClick=()=>{
+    setCurrent(item.id);
+    changeRight(item);
+  }
   let minus = '';
   //  item.id.length > 6? '----' : 
   //  item.id.length>4 ? '--' :null  ;
@@ -55,19 +66,27 @@ function FirstItem({ item, onAdd, onHide, onRemove, orderChange, updateName, add
   for (let index = 0; index < split.length - 1; index++) {
     minus += '--';
   }
-
+ 
   return (
-    <Box>
+    <Box onClick={boxClick}  style={ {
+      backgroundColor: item.id===current ? 'blue' : 'white'
+    }}>
       {minus}
       <button onClick={handleDown}>▼</button>
       <button onClick={handleUp}>▲</button>
-      <button onClick={handleClick}>+</button>
-      <button onClick={handleHide}>-</button>
+      {clicked?
+      <button onClick={handleClick}><img src={plusImg} height='15' /></button>:
+      imgStatus==='0'?
+      <button><img src={end} height='15' /></button>:
+      !clicked?
+      <button onClick={handleHide}><img src={minusImg} height='15' /></button>:null
+}
       {input ? <input placeholder="한글영문숫자만, 10자내외" type="text" onKeyPress={appKeyPress} onChange={handleChange} /> :
         <Box onClick={handleUpdate}>{item.name}</Box>
       }
       <button onClick={handleRemove}>삭제</button>
       <button onClick={handleAddSub}>추가</button>
+      
       {/* {menu} */}
       {/* {sub} */}
     </Box>
@@ -75,4 +94,5 @@ function FirstItem({ item, onAdd, onHide, onRemove, orderChange, updateName, add
   );
 
 }
+
 export default FirstItem;

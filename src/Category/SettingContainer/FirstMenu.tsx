@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import FirstItem from './FirstItem';
 
-function FirstMenu({ parentList, subMenu, onAdd, onRemove, onHide, orderChange, updateName, addSub}) {
+function FirstMenu({ parentList, subMenu, onAdd, onRemove, onHide, orderChange, updateName, addSub, changeRight, current, setCurrent }) {
     const [a, setA] = useState();
-    console.log(subMenu, parentList, '~~~~~');
 
     // let menu;
     // subMenu !== null ?
@@ -22,10 +21,14 @@ function FirstMenu({ parentList, subMenu, onAdd, onRemove, onHide, orderChange, 
     //     })
     // }
 
-    //setstate tsx물보기
     return (
         subMenu.map(item => {
-            if (item.status === "show")
+            if (item.status === "show") {
+                let imgStatus='0';                      
+                subMenu.map(list=>{
+                    console.log(list.id, item.id);
+                    if(list.parent_id===item.id) imgStatus='+';         //자식이 하나라도 있으면 +이미지  없으면 0이미지
+                });
                 // if (subMenu.length > 1) {
 
                 //     console.log(subMenu,typeof item,parentList.length)
@@ -38,7 +41,10 @@ function FirstMenu({ parentList, subMenu, onAdd, onRemove, onHide, orderChange, 
                 //         console.log(a,menu);
                 //     return <div key={item.id}><FirstItem item={item} onAdd={onAdd} menu={menu} /></div>
                 // }
-                return <div key={item.id}><FirstItem item={item} onAdd={onAdd} onRemove={onRemove} onHide={onHide} orderChange={orderChange} updateName={updateName} addSub={addSub} subMenu={subMenu} /></div>
+                return <div key={item.id}><FirstItem item={item}
+                    onAdd={onAdd} onRemove={onRemove} onHide={onHide} orderChange={orderChange}
+                    updateName={updateName} addSub={addSub} subMenu={subMenu} changeRight={changeRight} current={current} setCurrent={setCurrent} imgStatus={imgStatus}/></div>
+            }
         }
         )
         // parentList.map((item => {

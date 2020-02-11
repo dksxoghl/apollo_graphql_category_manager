@@ -15,6 +15,7 @@ import {
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { GET_CATEGORY, DELETE_CATEGORY, UPDATE_CATEGORY,INSERT_CATEGORY } from '../graphql/graphql';
 import SettingBox from './SettingContainer/SettingBox';
+import SettingRightBox from './SettingRightContainer/SettingRightBox';
 
 
 interface IProps {
@@ -24,6 +25,7 @@ interface IProps {
 
 const Category = () => {
   // const { submenu, selectedMenuId } = props;
+  const [checkItem, setCheckItem] = useState({});
 
   const { loading, error, data } = useQuery(GET_CATEGORY);
   // const [checkId, setCheckId] = useState([""]);
@@ -65,6 +67,10 @@ const Category = () => {
     // id.map(id=>  save({ variables: { id: id } }));
     alert('저장완료');
   }
+  
+const changeRight=(item)=>{
+    setCheckItem(item);
+  }
   return (
     <>
       <Container>
@@ -76,7 +82,7 @@ const Category = () => {
           <AdminTableBox>
             {/* <AdminTable /> */}
             {/* <SettingContainer categories={categories} onChange={onChange} /> */}
-            <SettingBox categories={categories} onSave={onSave} />
+            <SettingBox categories={categories} onSave={onSave} changeRight={changeRight} />
             <ButtonBox>
               {/* <ButtonSpan>
                     <Button type="primary" htmlType="submit">
@@ -97,6 +103,7 @@ const Category = () => {
             </ButtonBox>
           </AdminTableBox>
           <AdminAddFormBox>
+          <SettingRightBox item={checkItem}/>
             {/* <AdminAddForm /> */}
             {/* <ButtonBox>
                   <ButtonSpan>

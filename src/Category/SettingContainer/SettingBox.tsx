@@ -15,15 +15,16 @@ import {
 import { MoveDown } from './MoveDown';
 import NewOrder from './NewOrder';
 
-function SettingBox({ categories, onSave }) {
+function SettingBox({ categories, onSave,changeRight }) {
     const [selectID, setSelectID] = useState("");
     const [deleteId, setDeleteId] = useState([""]);
     const [insertId, setInsertId] = useState([""]);
-    let parentList = categories.filter(list => list.parent_id === null);
     const [subMenu, setSubMenu] = useState({
         // category: parentList
         category: categories
     });
+    let parentList = categories.filter(list => list.parent_id === null);
+    const [current,setCurrent] = useState("");
 
     // const addChild=(id)=>{
     //     // if(id!==index) return m.nodes[index];
@@ -86,10 +87,11 @@ function SettingBox({ categories, onSave }) {
             if (list.id.slice(0, len) === item.id) return list;
         });
         let below;
-        if (!type) {
+        if (!type) {                                        // 아래로갈때 다른 대 중분류일시 수정불가
             below = subMenu.category.slice((item.order - 1) + child.length, (item.order - 1) + child.length + 1);
-            if (!type && below[0].id.length < item.id.length) {             // 아래로갈때 다른 대 중분류일시 수정불가
-                return alert('같은 그룹끼리만 이동가능');
+            if(below.length<1) return alert('최하위입니다');       
+            else if (!type && below[0].id.length < item.id.length) {  
+                return alert('같은 그룹d끼리만 이동가능');
             }
         } else {
             let parentList = subMenu.category.filter(list => list.parent_id === item.parent_id);
@@ -281,8 +283,8 @@ function SettingBox({ categories, onSave }) {
     }
 
     let menu = <FirstMenu parentList={parentList} subMenu={subMenu.category} onAdd={onAdd} onRemove={onRemove} onHide={onHide} orderChange={orderChange} updateName={updateName}
-        addSub={addSub}
-    />;
+    addSub={addSub} changeRight={changeRight}  current={current} setCurrent={setCurrent}
+/>;
     return (
         <CBox>
             {/* <FirstMenu parentList={m.nodes} onAdd={onAdd} /> */}
