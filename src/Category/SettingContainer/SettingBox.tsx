@@ -293,12 +293,12 @@ function SettingBox({ categories, onSave,changeRight }) {
             {menu}
             {/* {addChild} */}
             <ButtonSpan>
-                <button onClick={addParent}>
+                <button className="ant-btn-primary" onClick={addParent}>
                     대분류추가
                   </button>
             </ButtonSpan>
             <ButtonSpan>
-                <button onClick={handleClick}>
+                <button className="ant-btn-primary" onClick={handleClick}>
                     저장
                   </button>
             </ButtonSpan>

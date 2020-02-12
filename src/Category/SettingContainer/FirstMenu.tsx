@@ -26,7 +26,6 @@ function FirstMenu({ parentList, subMenu, onAdd, onRemove, onHide, orderChange, 
             if (item.status === "show") {
                 let imgStatus='0';                      
                 subMenu.map(list=>{
-                    console.log(list.id, item.id);
                     if(list.parent_id===item.id) imgStatus='+';         //자식이 하나라도 있으면 +이미지  없으면 0이미지
                 });
                 // if (subMenu.length > 1) {

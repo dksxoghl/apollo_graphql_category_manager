@@ -31,6 +31,7 @@ query MyQuery {
     parent_id
     status
     order
+    active
   }
 }
 `
