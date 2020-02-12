@@ -54,9 +54,10 @@ export const AdminAddFormBox = styled.div`
 export const ButtonSpan = styled.span`
   margin: 1%;
   .ant-btn-primary {
-    background-color: #35c;
-    border-color: #35c;
+    background-color: #3a485c;
+    border-color: #3a485c;
   }
+  
 `;
 export const ButtonBox = styled.div`
   position: absolute;

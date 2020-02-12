@@ -5,15 +5,22 @@ import {
 } from "../styles";
 import { useState } from 'react';
 import { useEffect } from 'react';
-function SettingRightBox({item}) {
-    const [name,setName] = useState("");
-    const [check,setCheck] = useState(false);
-    useEffect(()=>{
-        setName(item.name);
-        setCheck(item.active);
-    },[item])
-    const handleChange=()=>{
+function SettingRightBox({ item,changeActive }) {
+    const [name, setName] = useState("");
+    const [check, setCheck] = useState(false);
+    useEffect(() => {
+        if (item.id === undefined) {
+            setName("");
+            setCheck(false);
+            console.log(item, '아이템초기화')
+        } else {
+            setName(item.name);
+            setCheck(item.active);
+        }
+    }, [item])
+    const handleChange = () => {
         setCheck(!check);
+        changeActive(!check,item.id);
     }
     return (
         <div>
@@ -28,17 +35,17 @@ function SettingRightBox({item}) {
                     <tr >
                         <th scope="row">활성화 상태</th>
                         <td>
-                            <input type="checkbox" checked={check} onChange={handleChange}/> 활성화
-                            <input type="checkbox"  checked={!check} onChange={handleChange}/>비활성화
+                            <input type="checkbox" checked={check} onChange={handleChange} /> 활성화
+                            <input type="checkbox" checked={!check} onChange={handleChange} />비활성화
                           </td>
                     </tr>
                 </tbody>
             </table>
             <ButtonSpan>
                 <button className="ant-btn-primary">
-                저장
+                    저장
                   </button>
-                  </ButtonSpan> 
+            </ButtonSpan>
         </div>
     );
 }

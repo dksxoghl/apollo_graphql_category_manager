@@ -15,7 +15,7 @@ import {
 import { MoveDown } from './MoveDown';
 import NewOrder from './NewOrder';
 
-function SettingBox({ categories, onSave,changeRight }) {
+function SettingBox({ categories, onSave,changeRight, active }) {
     const [selectID, setSelectID] = useState("");
     const [deleteId, setDeleteId] = useState([""]);
     const [insertId, setInsertId] = useState([""]);
@@ -62,6 +62,30 @@ function SettingBox({ categories, onSave,changeRight }) {
     // const [m, setM] = useState({
     //     nodes: initializedСopy(parentList),
     // });
+
+    useEffect(() => {
+        console.log(active.active, active.id);
+        setSubMenu({
+            category: subMenu.category.map(list => {
+                if(active.id.length===0)return list;
+                if (list.id.slice(0,active.id.length) === active.id) {
+                    return ({ ...list, active: active.active });
+                }
+                return list;
+            })
+        })
+          // if (parentList.length > 1) {
+        //     let b = true;     //이미 추가된 목록이라면 추가불가
+        //     subMenu.category.map((item) => {
+        //         if (item.parent_id === selectID) b = false;
+        //     })
+
+        //     if (b) (
+        //         setSubMenu({ category: subMenu.category.concat(parentList) })
+        //     )
+        // }
+        // //  setSubMenu(old=>[...old,parentList]); 
+    }, [active])
     const updateName = (item, value) => {
         console.log(item, value);
         setSubMenu({
@@ -222,25 +246,7 @@ function SettingBox({ categories, onSave,changeRight }) {
         setInsertId(insertId.concat(newId));
 
     }
-    //전체객체관리 
-    useEffect(() => {
-        let parentList = subMenu.category.filter(list => list.parent_id === null);
-
-        // if (parentList.length > 1) {
-        //     let b = true;     //이미 추가된 목록이라면 추가불가
-        //     subMenu.category.map((item) => {
-        //         if (item.parent_id === selectID) b = false;
-        //     })
-
-        //     if (b) (
-        //         setSubMenu({ category: subMenu.category.concat(parentList) })
-        //     )
-        // }
-        // //  setSubMenu(old=>[...old,parentList]); 
-        console.log(subMenu, parentList, '~~~~~');
-    }, [selectID, addSub])
-
-    // let menu=[<div></div>];
+   
 
 
 

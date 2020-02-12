@@ -26,7 +26,10 @@ interface IProps {
 const Category = () => {
   // const { submenu, selectedMenuId } = props;
   const [checkItem, setCheckItem] = useState({});
-
+  const [active, setActive] = useState({
+    id:"", active:false
+  });
+ 
   const { loading, error, data } = useQuery(GET_CATEGORY);
   // const [checkId, setCheckId] = useState([""]);
   // const [toggleTask] = useMutation(TOGGLE_TASK_MUTATION);
@@ -51,12 +54,12 @@ const Category = () => {
      return changedList.filter(item=>item.id===id);
     })
     console.log(insertList);
-    insertList.map(list=> insert({variables: { id: list[0].id, name: list[0].name, parent_id: list[0].parent_id, order: list[0].order,status:list[0].status }}))
+    insertList.map(list => insert({ variables: { id: list[0].id, name: list[0].name, parent_id: list[0].parent_id, order: list[0].order, status: list[0].status,active:list[0].active } }))
     deleteId.map(id => erase({ variables: { id: id } }));
     // if (deleteId.length === 1 && changedList.length === categories.length) {
-      changedList.map(list => {
-        save({ variables: { id: list.id, name: list.name, parent_id: list.parent_id, order: list.order,status:list.status } })
-      });
+    changedList.map(list => {
+      save({ variables: { id: list.id, name: list.name, parent_id: list.parent_id, order: list.order, status: list.status ,active:list.active} })
+    });
     // } else if (changedList.length > data.categories2.length) {
 
     // } else {
@@ -71,6 +74,10 @@ const Category = () => {
 const changeRight=(item)=>{
     setCheckItem(item);
   }
+  const changeActive=(active,id)=>{
+    console.log(active)
+    setActive({active:active,id});
+  }
   return (
     <>
       <Container>
@@ -82,7 +89,7 @@ const changeRight=(item)=>{
           <AdminTableBox>
             {/* <AdminTable /> */}
             {/* <SettingContainer categories={categories} onChange={onChange} /> */}
-            <SettingBox categories={categories} onSave={onSave} changeRight={changeRight} />
+            <SettingBox categories={categories} onSave={onSave} changeRight={changeRight} active={active} />
             <ButtonBox>
               {/* <ButtonSpan>
                     <Button type="primary" htmlType="submit">
@@ -103,7 +110,7 @@ const changeRight=(item)=>{
             </ButtonBox>
           </AdminTableBox>
           <AdminAddFormBox>
-          <SettingRightBox item={checkItem}/>
+          <SettingRightBox item={checkItem} changeActive={changeActive}/>
             {/* <AdminAddForm /> */}
             {/* <ButtonBox>
                   <ButtonSpan>

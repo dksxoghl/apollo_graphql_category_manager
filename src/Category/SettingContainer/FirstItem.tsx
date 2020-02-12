@@ -1,11 +1,9 @@
 import React, { useState, useCallback } from 'react';
-import { useQuery, useLazyQuery } from '@apollo/react-hooks';
-import { GET_SUBCATEGORY } from '../../graphql/graphql';
-import FirstMenu from './FirstMenu';
-import { Box } from './styles'
+import { Box, InBox } from './styles'
 import plusImg from '../img/plus.png';
 import end from '../img/end.png';
 import minusImg from '../img/minus.png';
+
 function FirstItem({ item, onAdd, onHide, onRemove, orderChange, updateName, addSub, subMenu ,changeRight,current,setCurrent,imgStatus}) {
   const [input, setInput] = useState(false);
   const [value, setValue] = useState('');
@@ -68,8 +66,8 @@ function FirstItem({ item, onAdd, onHide, onRemove, orderChange, updateName, add
   }
  
   return (
-    <Box onClick={boxClick}  style={ {
-      backgroundColor: item.id===current ? 'blue' : 'white'
+    <Box active={item.active} onClick={boxClick}  style={ {
+      backgroundColor: item.id===current ? '#90d5eb' : 'white'
     }}>
       {minus}
       <button onClick={handleDown}>▼</button>
@@ -82,7 +80,7 @@ function FirstItem({ item, onAdd, onHide, onRemove, orderChange, updateName, add
       <button onClick={handleHide}><img src={minusImg} height='15' /></button>:null
 }
       {input ? <input placeholder="한글영문숫자만, 10자내외" type="text" onKeyPress={appKeyPress} onChange={handleChange} /> :
-        <Box onClick={handleUpdate}>{item.name}</Box>
+        <InBox onClick={handleUpdate}>{item.name}</InBox>
       }
       <button onClick={handleRemove}>삭제</button>
       <button onClick={handleAddSub}>추가</button>
