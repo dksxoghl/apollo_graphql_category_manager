@@ -12,6 +12,7 @@ import {
     ButtonSpan,
     ButtonBox
 } from "../styles";
+import {  ParentAddSpan,SaveSpan } from './styles';
 import { MoveDown } from './MoveDown';
 import NewOrder from './NewOrder';
 
@@ -65,16 +66,18 @@ function SettingBox({ categories, onSave,changeRight, active }) {
 
     useEffect(() => {
         console.log(active.active, active.id);
+        if(active.id===undefined) return;
         setSubMenu({
             category: subMenu.category.map(list => {
-                if(active.id.length===0)return list;
-                if (list.id.slice(0,active.id.length) === active.id) {
+                if (active.id.length === 0) return list;
+                if (list.id.slice(0, active.id.length) === active.id) {
                     return ({ ...list, active: active.active });
                 }
                 return list;
             })
         })
-          // if (parentList.length > 1) {
+
+        // if (parentList.length > 1) {
         //     let b = true;     //이미 추가된 목록이라면 추가불가
         //     subMenu.category.map((item) => {
         //         if (item.parent_id === selectID) b = false;
@@ -85,7 +88,7 @@ function SettingBox({ categories, onSave,changeRight, active }) {
         //     )
         // }
         // //  setSubMenu(old=>[...old,parentList]); 
-    }, [active])
+    }, [active,current])
     const updateName = (item, value) => {
         console.log(item, value);
         setSubMenu({
@@ -298,16 +301,16 @@ function SettingBox({ categories, onSave,changeRight, active }) {
             {/* {m} */}
             {menu}
             {/* {addChild} */}
-            <ButtonSpan>
-                <button className="ant-btn-primary" onClick={addParent}>
+            <ParentAddSpan>
+                <button onClick={addParent}>
                     대분류추가
                   </button>
-            </ButtonSpan>
-            <ButtonSpan>
-                <button className="ant-btn-primary" onClick={handleClick}>
+            </ParentAddSpan>
+            <SaveSpan>
+                <button onClick={handleClick}>
                     저장
                   </button>
-            </ButtonSpan>
+            </SaveSpan>
         </CBox>
     );
 }

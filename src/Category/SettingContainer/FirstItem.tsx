@@ -1,14 +1,17 @@
 import React, { useState, useCallback } from 'react';
-import { Box, InBox } from './styles'
-import plusImg from '../img/plus.png';
-import end from '../img/end.png';
-import minusImg from '../img/minus.png';
+import { Box,InBox,UpSpan,DownSpan,DeleteSpan,SubAddSpan,NameSpan,ButtonSpan,OnlyCurrent } from './styles'
+import plusImg from '../img/plus2.png';
+import end from '../img/end2.png';
+import minusImg from '../img/minus2.png';
+import triangle from '../img/triangle.png';
+import downTriangle from '../img/triangle-copy.png';
+
 
 function FirstItem({ item, onAdd, onHide, onRemove, orderChange, updateName, addSub, subMenu ,changeRight,current,setCurrent,imgStatus}) {
   const [input, setInput] = useState(false);
   const [value, setValue] = useState('');
   const [clicked,setClicked] = useState(imgStatus==='+'? true:false);             // 이미지 결정 state
-  
+  console.log(current);
   const handleClick = () => {
     setClicked(false);
     onAdd(item.id);
@@ -62,31 +65,38 @@ function FirstItem({ item, onAdd, onHide, onRemove, orderChange, updateName, add
   //  item.id.length>4 ? '--' :null  ;
   let split = item.id.split(':');
   for (let index = 0; index < split.length - 1; index++) {
-    minus += '--';
+    minus += '\u00A0\u00A0\u00A0\u00A0\u00A0';
   }
  
   return (
     <Box active={item.active} onClick={boxClick}  style={ {
-      backgroundColor: item.id===current ? '#90d5eb' : 'white'
+      backgroundColor: item.id===current ? '#eeeeee' : 'white'
     }}>
       {minus}
-      <button onClick={handleDown}>▼</button>
-      <button onClick={handleUp}>▲</button>
+     
       {clicked?
-      <button onClick={handleClick}><img src={plusImg} height='15' /></button>:
+      <ButtonSpan onClick={handleClick}><img src={plusImg} height='15' /></ButtonSpan>:
       imgStatus==='0'?
-      <button><img src={end} height='15' /></button>:
+      <ButtonSpan><img src={end} height='15' /></ButtonSpan>:
       !clicked?
-      <button onClick={handleHide}><img src={minusImg} height='15' /></button>:null
+      <ButtonSpan onClick={handleHide}><img src={minusImg} height='15' /></ButtonSpan>:null
 }
       {input ? <input placeholder="한글영문숫자만, 10자내외" type="text" onKeyPress={appKeyPress} onChange={handleChange} /> :
-        <InBox onClick={handleUpdate}>{item.name}</InBox>
+        <InBox onClick={handleUpdate}><NameSpan>{item.name}</NameSpan></InBox>
       }
-      <button onClick={handleRemove}>삭제</button>
-      <button onClick={handleAddSub}>추가</button>
-      
-      {/* {menu} */}
-      {/* {sub} */}
+       {item.id===current?
+      <span>
+      <DownSpan onClick={handleDown}><img src={downTriangle} height='11' /></DownSpan>
+      <UpSpan onClick={handleUp}><img src={triangle} height='11' /></UpSpan>
+      <DeleteSpan onClick={handleRemove}>선택삭제</DeleteSpan>
+      <SubAddSpan onClick={handleAddSub}>하위분류 추가</SubAddSpan>
+      </span>:null
+      //  <OnlyCurrent>
+      //  <DownSpan ><img src={downTriangle} height='11' /></DownSpan>
+      //  <UpSpan ><img src={triangle} height='11' /></UpSpan>
+      //  <DeleteSpan >선택삭제</DeleteSpan>
+      //  </OnlyCurrent>
+}
     </Box>
 
   );
@@ -94,3 +104,5 @@ function FirstItem({ item, onAdd, onHide, onRemove, orderChange, updateName, add
 }
 
 export default FirstItem;
+
+//내일업다운수정
