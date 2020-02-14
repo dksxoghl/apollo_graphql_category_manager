@@ -1,14 +1,14 @@
 # apollo_graphql_category_manager
---카테고리 항목 관리(상품 및 즐겨찾기 목록, 관리자 페이지에 활용가능)--
-using apollo client, apollo react-hooks,graphql, develop category modulization<br/>
+--카테고리 항목 관리(상품 및 즐겨찾기 목록, 관리자 페이지에 활용가능)--<br>
+using apollo client, apollo react-hooks,graphql, develop category modulization<br>
 grahpql engine = hasura 이용<br/>
 https://apollo-category.herokuapp.com/v1/graphql
 category table, column 설명
 
 
 
-  id ex) a0:a1 는 기본키,string 값, id로 항목들 구별, 하위항목들은 parent_id 가 상위항목id임.
-name 항목이름, 
+  id ex) a0:a1 는 기본키,string 값, id로 항목들 구별, 하위항목들은 parent_id 가 상위항목id임.<br/>
+name 항목이름, <br/>
 status는 'show','hide' string값- show일때 관리자항목에서 보여지고 hide일때 사라짐(하위항목들 보기위한 boolean역할 필드) 
 order 순서 정렬을 위한 필드, 처음 hasura 서버에서 호출시 조건으로 order by order을 하여 순서대로 정렬됨, 순서 바꿈시에도 order값 바뀌게 코
 딩됨.
