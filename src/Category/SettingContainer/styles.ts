@@ -35,7 +35,7 @@ export const CBox = styled.div`
 // display: inline-block; 
 export const Box = styled.div<IProps>`
 border: 1px solid #dddddd; 
-opacity:${props => props.active ? 1.0 : 0.3};
+opacity:${props => props.active ? 1.0 : 0.4};
 `;
 // ${({ active }) => active && `
 //   opacity:0.3;
@@ -54,12 +54,21 @@ width:120px;
 
 export const ParentAddSpan = styled.span`
   position: absolute;
-  top:420px;
+  top:380px;
   .ant-btn-primary {
     background-color: #3a485c;
     border-color: #3a485c;
     width: 378px;
   height: 38px;
+
+  font-family: NanumBarunGothic;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.19px;
+  color: #ffffff;
   }
   width:150%;
 `;
@@ -76,17 +85,28 @@ export const ParentAddSpan = styled.span`
 export const SaveSpan = styled.span`
 position: absolute;
 left:810px;
-top:500px;
+top:450px;
 .ant-btn-primary {
     background-color: #3a485c;
     border-color: #3a485c;
     width: 130px;
   height: 40px;
+ 
+  font-family: NanumBarunGothic;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.19px;
+  color: #ffffff;
   }
+  width:150%;
+  
 `;
 export const UpSpan = styled.span`
 position: absolute;
-top:465px;
+top:425px;
 left:5px;
     width: 50px;
   height: 40px;
@@ -94,7 +114,7 @@ left:5px;
 `;
 export const DownSpan = styled.span`
 position: absolute;
-top:465px;
+top:425px;
 left:40px;
     width: 50px;
   height: 40px;
@@ -102,7 +122,7 @@ left:40px;
 `;
 export const DeleteSpan = styled.span`
 position: absolute;
-top:465px;
+top:425px;
 left:300px;
 width: 74px;
 height: 26px;

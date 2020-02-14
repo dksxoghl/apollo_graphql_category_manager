@@ -39,7 +39,7 @@ const Category = () => {
 
   if (loading) return <p>'Loading...'</p>;
   if (error) return <p>`Error! ${error.message}`</p>;
-  const categories = data.categories2;
+  const categories = data.categories;
   // const onChange = (e) => {
   //   // console.log(`checked = ${e.target.checked}`,e,e.target,e.target.onFocus);
   //   console.log('ccclick', e);

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-
+  background-color: #F7F5F4;
   padding: 1rem;
 `;
 
@@ -51,7 +51,7 @@ export const UnderLine = styled.hr`
 export const ContentBox = styled.div`
 width: 944px;
   height: 496px;
-  background-color: #ffffff;
+  background-color: #FFFfff;
   position:absolute;
 `;
 export const SubTitleBox = styled.div`
@@ -89,7 +89,7 @@ left: 40%;
   display: inline-block; 
 `
 export const AdminAddFormBox = styled.div`
-width: 596.5px;
+width: 566.5px;
 left: 40.5%;
 position:absolute;
   justify-content: center;

@@ -35,7 +35,7 @@ import gql from "graphql-tag";
 // `;
 export const DELETE_CATEGORY =gql`
 mutation MyMutation2($id: String!) {
-  delete_categories2(where: {_or: [{id: {_eq: $id}}, {parent_id: {_eq: $id}}]}) {
+  delete_categories(where: {_or: [{id: {_eq: $id}}, {parent_id: {_eq: $id}}]}) {
     affected_rows
   }
 }
@@ -44,12 +44,13 @@ mutation MyMutation2($id: String!) {
 
 export const GET_CATEGORY = gql`
 query MyQuery {
-  categories2(where: {}, order_by: {order: asc}) {
+  __typename
+  categories(order_by: {order: asc}) {
     id
     name
+    order
     parent_id
     status
-    order
     active
   }
 }
@@ -57,14 +58,14 @@ query MyQuery {
 
 export const UPDATE_CATEGORY = gql`
 mutation MyMutation($id: String!,$name:String!,$parent_id:String, $order:Int!,$status:String!,$active:Boolean) {
-  update_categories2(_set: {name: $name, parent_id: $parent_id, order: $order,status:$status,active:$active}, where: {id: {_eq: $id}}) {
+  update_categories(_set: {name: $name, parent_id: $parent_id, order: $order,status:$status,active:$active}, where: {id: {_eq: $id}}) {
     affected_rows
   }
 }
 `
 export const INSERT_CATEGORY =gql`
 mutation MyMutation3($id: String!,$name:String!,$parent_id:String, $order:Int!,$status:String!,$active:Boolean) {
-  insert_categories2(objects: {id: $id,name: $name, parent_id: $parent_id, order: $order,status:$status,active:$active}) {
+  insert_categories(objects: {id: $id,name: $name, parent_id: $parent_id, order: $order,status:$status,active:$active}) {
     affected_rows
   }
 }

@@ -17,6 +17,7 @@ import { MoveDown } from './MoveDown';
 import NewOrder from './NewOrder';
 
 function SettingBox({ categories, onSave,changeRight, active }) {
+    console.log(categories)
     const [selectID, setSelectID] = useState("");
     const [deleteId, setDeleteId] = useState([""]);
     const [insertId, setInsertId] = useState([""]);
@@ -228,6 +229,7 @@ function SettingBox({ categories, onSave,changeRight, active }) {
             parent_id: id,
             status: "show",
             order: parentList[parentList.length - 1].order + 1,
+            active:false,
             __typename: "categories2"
 
         }
@@ -304,12 +306,12 @@ function SettingBox({ categories, onSave,changeRight, active }) {
         </CBox>
 
         <ParentAddSpan>
-            <button onClick={addParent}>
-                대분류추가
+            <button className='ant-btn-primary' onClick={addParent}>
+                +대분류 추가하기
               </button>
         </ParentAddSpan>
         <SaveSpan>
-            <button onClick={handleClick}>
+            <button className='ant-btn-primary'  onClick={handleClick}>
                 저장
               </button>
         </SaveSpan>

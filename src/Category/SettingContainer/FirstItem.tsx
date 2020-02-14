@@ -86,8 +86,8 @@ function FirstItem({ item, onAdd, onHide, onRemove, orderChange, updateName, add
       }
        {item.id===current?
       <span>
-      <DownSpan onClick={handleDown}><img src={downTriangle} height='11' /></DownSpan>
       <UpSpan onClick={handleUp}><img src={triangle} height='11' /></UpSpan>
+      <DownSpan onClick={handleDown}><img src={downTriangle} height='11' /></DownSpan>
       <DeleteSpan onClick={handleRemove}>선택삭제</DeleteSpan>
       <SubAddSpan onClick={handleAddSub}>하위분류 추가</SubAddSpan>
       </span>:null

@@ -6,7 +6,7 @@ interface IProps {
 export const RightBoxTitle = styled.div`
 width: 150px;
   height: 24px;
-  padding:3px;
+  padding:6px;
   background-color: #edf7fa;
   font-family: NanumBarunGothic;
   font-size: 13px;
@@ -31,8 +31,10 @@ border: solid 0.5px #dddddd;
 // width:400px;
 export const Input = styled.input`
 display: inline-block;
-width: 400px; /* 원하는 너비 설정 */ 
-height: 24px; /* 높이값 초기화 */
+width: 392px; /* 원하는 너비 설정 */ 
+height: 32px; /* 높이값 초기화 */
+position: absolute;
+top:1.5px;
  line-height : normal; /* line-height 초기화 */ 
   font-family: inherit; /* 폰트 상속 */ border: 1px solid #dddddd; 
   border-radius:5; /* iSO 둥근모서리 제거 */
