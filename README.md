@@ -1,8 +1,8 @@
 ># apollo_graphql_category_manager
 >###--카테고리 항목 관리(상품 및 즐겨찾기 목록, 관리자 페이지에 활용가능)--<br>
-- using apollo client, apollo react-hooks,graphql, develop category modulization<br>
-- grahpql engine = hasura 이용<br/>
-- https://apollo-category.herokuapp.com/v1/graphql<br/>
+-using apollo client, apollo react-hooks,graphql, develop category modulization<br>
+-grahpql engine = hasura 이용<br/>
+-https://apollo-category.herokuapp.com/v1/graphql<br/>
 - category table, column 설명<br/>
 
   id ex) a0:a1 는 기본키,string 값, id로 항목들 구별, 하위항목들은 parent_id 가 상위항목id임.<br/>
