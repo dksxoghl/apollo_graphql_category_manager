@@ -66,18 +66,16 @@ function SettingBox({ categories, onSave,changeRight, active }) {
 
     useEffect(() => {
         console.log(active.active, active.id);
-        if(active.id===undefined) return;
         setSubMenu({
             category: subMenu.category.map(list => {
-                if (active.id.length === 0) return list;
-                if (list.id.slice(0, active.id.length) === active.id) {
+                if(active.id.length===0)return list;
+                if (list.id.slice(0,active.id.length) === active.id) {
                     return ({ ...list, active: active.active });
                 }
                 return list;
             })
         })
-
-        // if (parentList.length > 1) {
+          // if (parentList.length > 1) {
         //     let b = true;     //이미 추가된 목록이라면 추가불가
         //     subMenu.category.map((item) => {
         //         if (item.parent_id === selectID) b = false;
@@ -88,7 +86,7 @@ function SettingBox({ categories, onSave,changeRight, active }) {
         //     )
         // }
         // //  setSubMenu(old=>[...old,parentList]); 
-    }, [active,current])
+    }, [active])
     const updateName = (item, value) => {
         console.log(item, value);
         setSubMenu({
@@ -295,23 +293,27 @@ function SettingBox({ categories, onSave,changeRight, active }) {
     addSub={addSub} changeRight={changeRight}  current={current} setCurrent={setCurrent}
 />;
     return (
+        <div>
         <CBox>
+
             {/* <FirstMenu parentList={m.nodes} onAdd={onAdd} /> */}
             {/* {menu&&menu} */}
             {/* {m} */}
             {menu}
             {/* {addChild} */}
-            <ParentAddSpan>
-                <button onClick={addParent}>
-                    대분류추가
-                  </button>
-            </ParentAddSpan>
-            <SaveSpan>
-                <button onClick={handleClick}>
-                    저장
-                  </button>
-            </SaveSpan>
         </CBox>
+
+        <ParentAddSpan>
+            <button onClick={addParent}>
+                대분류추가
+              </button>
+        </ParentAddSpan>
+        <SaveSpan>
+            <button onClick={handleClick}>
+                저장
+              </button>
+        </SaveSpan>
+    </div>
     );
 }
 export default SettingBox;
