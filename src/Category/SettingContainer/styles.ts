@@ -43,7 +43,7 @@ opacity:${props => props.active ? 1.0 : 0.4};
 export const InBox = styled.div`
 display: inline-block; 
 margin:2px;
-text-align: center;
+text-align: left;
 width:120px;
 `;
 
@@ -157,10 +157,10 @@ font-family: NanumBarunGothic;
   font-color: #3a485c;
   }
 `;
+// font-weight: bold;
 export const NameSpan = styled.span`
 font-family: NanumBarunGothic;
   font-size: 13px;
-  font-weight: bold;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;

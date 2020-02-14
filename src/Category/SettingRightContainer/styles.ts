@@ -47,25 +47,38 @@ top:1.5px;
       opacity: 0.5;
     }
 `;
-const checkedStyles = css`
-box-shadow: 0 4px 6px blue, 0 1px 3px blue;
-background-color: white;
-border-radius: 10px;
-padding: 20px;
-`
-const uncheckedStyles = css`
-background: red;
-`
 
-export const InputCheck = styled.input.attrs({ type: 'checkbox' })`
-display: inline-block;
- &:checked {
-  ${checkedStyles}
-  }
-  &:not(:checked) {
-   ${uncheckedStyles}
-  }
-`;
+
+export const Span = styled.span`
+font-family: NanumBarunGothic;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  color: #333333;
+  letter-spacing: -0.19px;
+`
+// const checkedStyles = css`
+// box-shadow: 0 4px 6px blue, 0 1px 3px blue;
+// background-color: white;
+// border-radius: 10px;
+// padding: 20px;
+// background-image:url('../img/checkFalse.png')
+// `
+// const uncheckedStyles = css`
+// background: red;
+// `
+
+// export const InputCheck = styled.input.attrs({ type: 'checkbox' })`
+// display: inline-block;
+//  &:checked {
+//   background-image:url('../img/checkFalse.png')
+//   }
+//   &:not(:checked) {
+//    ${uncheckedStyles}
+//   }
+// `;
   //  &:checked {
   //   background: 'salmon'
   // }

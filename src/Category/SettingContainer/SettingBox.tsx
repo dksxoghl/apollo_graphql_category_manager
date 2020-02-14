@@ -66,7 +66,7 @@ function SettingBox({ categories, onSave,changeRight, active }) {
     // });
 
     useEffect(() => {
-        console.log(active.active, active.id);
+        if(active.id===undefined) return;
         setSubMenu({
             category: subMenu.category.map(list => {
                 if(active.id.length===0)return list;
