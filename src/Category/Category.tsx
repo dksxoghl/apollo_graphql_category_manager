@@ -29,6 +29,9 @@ const Category = () => {
   const [active, setActive] = useState({
     id:"", active:false
   });
+  const [handleName, setHandleName] = useState({
+    id:"", name:"",parent_id:""
+  });
  
   const { loading, error, data } = useQuery(GET_CATEGORY);
   // const [checkId, setCheckId] = useState([""]);
@@ -73,11 +76,16 @@ const Category = () => {
   
 const changeRight=(item)=>{
     setCheckItem(item);
-  }
+  };
   const changeActive=(active,id)=>{
     console.log(active)
     setActive({active:active,id});
-  }
+  };
+  const changeName=(name,id,parent_id)=>{
+    setHandleName({
+      id,name,parent_id
+    })
+  };
   return (
     <>
       <Container>
@@ -89,7 +97,7 @@ const changeRight=(item)=>{
           <AdminTableBox>
             {/* <AdminTable /> */}
             {/* <SettingContainer categories={categories} onChange={onChange} /> */}
-            <SettingBox categories={categories} onSave={onSave} changeRight={changeRight} active={active} />
+            <SettingBox categories={categories} onSave={onSave} changeRight={changeRight} active={active} handleName={handleName}/>
             <ButtonBox>
               {/* <ButtonSpan>
                     <Button type="primary" htmlType="submit">
@@ -110,7 +118,7 @@ const changeRight=(item)=>{
             </ButtonBox>
           </AdminTableBox>
           <AdminAddFormBox>
-          <SettingRightBox item={checkItem} changeActive={changeActive}/>
+          <SettingRightBox item={checkItem} changeActive={changeActive} changeName={changeName}/>
             {/* <AdminAddForm /> */}
             {/* <ButtonBox>
                   <ButtonSpan>

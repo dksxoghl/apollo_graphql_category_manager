@@ -7,9 +7,9 @@ import triangle from '../img/triangle.png';
 import downTriangle from '../img/triangle-copy.png';
 
 
-function FirstItem({ item, onAdd, onHide, onRemove, orderChange, updateName, addSub, subMenu ,changeRight,current,setCurrent,imgStatus}) {
-  const [input, setInput] = useState(false);
-  const [value, setValue] = useState('');
+function FirstItem({ item, onAdd, onHide, onRemove, orderChange, addSub, subMenu ,changeRight,current,setCurrent,imgStatus}) {
+  // const [input, setInput] = useState(false);
+  // const [value, setValue] = useState('');
   const [clicked,setClicked] = useState(imgStatus==='+'? true:false);             // 이미지 결정 state
   console.log(current);
   const handleClick = () => {
@@ -29,29 +29,29 @@ function FirstItem({ item, onAdd, onHide, onRemove, orderChange, updateName, add
   const handleDown = () => {
     orderChange(item, false);
   }
-  const handleUpdate = () => {
-    setInput(true);
-  }
-  const deny_char = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]{1,10}$/;
-  const appKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      if (value === "") return alert('1자이상 입력하시오');
-      if (!deny_char.test(value)) {
-        return alert('10자 내, 또는 영문자와 한글,숫자만을 입력하세요');
-      }
-      let parentList = subMenu.filter(list => list.parent_id === item.parent_id);
-      let check = false;
-      parentList.map(item => {
-        if (item.name === value) check = true;
-      });
-      if (check) return alert('같은 depth에 중복된이름이 있습니다');
-      setInput(false);
-      updateName(item, value);
-    }
-  }
-  const handleChange = useCallback((e) => {
-    setValue(e.target.value);
-  }, [appKeyPress]);
+  // const handleUpdate = () => {
+  //   setInput(true);
+  // }
+  // const deny_char = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]{1,10}$/;
+  // const appKeyPress = (e) => {
+  //   if (e.key === 'Enter') {
+  //     if (value === "") return alert('1자이상 입력하시오');
+  //     if (!deny_char.test(value)) {
+  //       return alert('10자 내, 또는 영문자와 한글,숫자만을 입력하세요');
+  //     }
+  //     let parentList = subMenu.filter(list => list.parent_id === item.parent_id);
+  //     let check = false;
+  //     parentList.map(item => {
+  //       if (item.name === value) check = true;
+  //     });
+  //     if (check) return alert('같은 depth에 중복된이름이 있습니다');
+  //     setInput(false);
+  //     updateName(item, value);
+  //   }
+  // }
+  // const handleChange = useCallback((e) => {
+  //   setValue(e.target.value);
+  // }, [appKeyPress]);
 
   const handleAddSub = () => {
     addSub(item.id);
@@ -81,9 +81,9 @@ function FirstItem({ item, onAdd, onHide, onRemove, orderChange, updateName, add
       !clicked?
       <ButtonSpan onClick={handleHide}><img src={minusImg} height='15' /></ButtonSpan>:null
 }
-      {input ? <input placeholder="한글영문숫자만, 10자내외" type="text" onKeyPress={appKeyPress} onChange={handleChange} /> :
-        <InBox onClick={handleUpdate}><NameSpan>{item.name}</NameSpan></InBox>
-      }
+      {/* {input ? <input placeholder="한글영문숫자만, 10자내외" type="text" onKeyPress={appKeyPress} onChange={handleChange} /> : */}
+        <InBox ><NameSpan>{item.name}</NameSpan></InBox>
+      {/* } */}
        {item.id===current?
       <span>
       <UpSpan onClick={handleUp}><img src={triangle} height='11' /></UpSpan>

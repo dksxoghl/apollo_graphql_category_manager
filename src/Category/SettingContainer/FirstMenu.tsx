@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import FirstItem from './FirstItem';
 
-function FirstMenu({ parentList, subMenu, onAdd, onRemove, onHide, orderChange, updateName, addSub, changeRight, current, setCurrent }) {
+function FirstMenu({ parentList, subMenu, onAdd, onRemove, onHide, orderChange, addSub, changeRight, current, setCurrent }) {
     const [a, setA] = useState();
 
     // let menu;
@@ -42,7 +42,7 @@ function FirstMenu({ parentList, subMenu, onAdd, onRemove, onHide, orderChange, 
                 // }
                 return <div key={item.id}><FirstItem item={item}
                     onAdd={onAdd} onRemove={onRemove} onHide={onHide} orderChange={orderChange}
-                    updateName={updateName} addSub={addSub} subMenu={subMenu} changeRight={changeRight} current={current} setCurrent={setCurrent} imgStatus={imgStatus}/></div>
+                    addSub={addSub} subMenu={subMenu} changeRight={changeRight} current={current} setCurrent={setCurrent} imgStatus={imgStatus}/></div>
             }
         }
         )
