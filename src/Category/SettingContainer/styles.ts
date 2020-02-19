@@ -33,18 +33,19 @@ export const CBox = styled.div`
 //   border: 1px solid;
 
 // display: inline-block; 
-export const Box = styled.div<IProps>`
+export const Box = styled.div`
 border: 1px solid #dddddd; 
-opacity:${props => props.active ? 1.0 : 0.4};
+
+height: 35px;
 `;
 // ${({ active }) => active && `
 //   opacity:0.3;
 //   `}
 export const InBox = styled.div`
 display: inline-block; 
-margin:2px;
+margin:4px;
 text-align: left;
-width:120px;
+width:130px;
 `;
 
 // background-color: ${props => {
@@ -72,6 +73,30 @@ export const ParentAddSpan = styled.span`
   }
   width:150%;
 `;
+// export const Box = styled.div`
+// border: 1px solid #dddddd; 
+
+// height: 35px;
+// `;
+// // ${({ active }) => active && `
+// //   opacity:0.3;
+// //   `}
+// export const InBox = styled.div`
+// display: inline-block; 
+// margin:4px;
+// text-align: left;
+// width:130px;
+// `;
+
+export const InLine = styled.span<IProps>`
+opacity:${props => props.active ? 1.0 : 0.3};
+`;
+// background-color: ${props => {
+//   if (props) return '#249D3D';
+//   else return '#7B838B';
+// }};
+
+
 
 // export const ParentAddButtonBox = styled.div`
 // text-align: center;
@@ -146,6 +171,15 @@ height: 26px;
 border-radius: 3px;
 border: solid 1px #3a485c;
 background-color: #ffffff;
+padding-top:5px;
+padding-bottom:5px;
+padding-left:10px;
+padding-right:10px;
+margin:4px;
+:hover{
+  cursor: pointer;
+}
+
 
 font-family: NanumBarunGothic;
   font-size: 12px;
@@ -175,3 +209,20 @@ margin:10px;
 export const OnlyCurrent = styled.span`
 opacity: 0.1
 `;
+
+export const ButtonLine=styled.span`
+position: absolute;
+top:420px;
+left:30px;
+width: 1px;
+  height: 35px;
+  border: solid 1px #dddddd;
+`
+export const ButtonLine2=styled.span`
+position: absolute;
+top:420px;
+left:68px;
+width: 1px;
+  height: 35px;
+  border: solid 1px #dddddd;
+`

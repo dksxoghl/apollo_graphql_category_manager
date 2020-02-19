@@ -123,24 +123,41 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
     //     })
     // }
     const orderChange = (item, type) => {
-        if ((item.order === 1 && type) || item.order === subMenu.category.length && !type) return alert('최상위, 최하위입니다.');
+        if ((item.order === 1 && type) || item.order === subMenu.category.length && !type) return;
         if (type && subMenu.category[item.order - 2].id === item.parent_id) {       //위로갈때 
-            return alert('같은 그룹끼리만 이동가능');
+            return alert('같은 그룹 내에서만 이동이 가능합니다.');
         }
-        if (!type && subMenu.category[item.order].id.length < item.id.length) { //아래로갈때
-            return alert('같은 그룹끼리만 이동가능');
+       
+        if (!type) { //아래로갈때
+            let x, y;
+            x = subMenu.category[item.order].id.split(':');
+            y = item.id.split(':');
+            if( x.length < y.length)
+            return alert('같은 그룹 내에서만 이동이 가능합니다.');
         }
+        // if (!type && subMenu.category[item.order].id.length < item.id.length) { //아래로갈때
+        //     return alert('같은 그룹끼리만 이동가능');
+        // }
         let child = subMenu.category.filter(list => {
             let len = item.id.length;
-            if (list.id.slice(0, len) === item.id) return list;
+            if(list.id===item.id) return list;
+            if (list.id.slice(0, len+1) === (item.id+':')) return list;
         });
+       
         let below;
+
         if (!type) {                                        // 아래로갈때 다른 대 중분류일시 수정불가
-            below = subMenu.category.slice((item.order - 1) + child.length, (item.order - 1) + child.length + 1);
-            if (below.length < 1) return alert('최하위입니다');
-            else if (!type && below[0].id.length < item.id.length) {
-                return alert('같은 그룹d끼리만 이동가능');
-            }
+            below = subMenu.category.slice((item.order - 1) + child.length, (item.order - 1) + child.length + 1);                 
+            console.log(below);
+            if (below.length < 1) return;
+            let x, y;
+            x =  below[0].id.split(':');
+            y = item.id.split(':');
+            if( x.length < y.length)
+            return alert('같은 그룹 내에서만 이동이 가능합니다.');
+            // else if (!type && below[0].id.length < item.id.length) {
+            //     return alert('같은 그룹d끼리만 이동가능');
+            // }
         } else {
             let parentList = subMenu.category.filter(list => list.parent_id === item.parent_id);
             console.log(parentList, item);
@@ -160,11 +177,24 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
             // below = subMenu.category.filter(list => list.id === id);
             console.log(below);
         }
-        let behind = subMenu.category.filter(list => {
-            let len = below[0].id.length;
-            if (list.id.slice(0, len) === below[0].id) return list;
+        let c = below[0].id.split(":");
+        console.log(c);
+        let behind = subMenu.category.filter(list => {              //자신포함하위항목들 아이디로 찾기
+            let findArray = list.id.split(":");
+            let findId = '';
+            for (let index = 0; index < c.length; index++) {
+                findId += findArray[index] + ':';
+            }
+            findId = findId.substring(0, findId.length - 1);
+            console.log(findId);
+            if (findId === below[0].id) return list;
+            // let findId = list.id.split(":");
+            // if(findId[0]=== below[0].id) return list;
+
+            // let len = below[0].id.length;
+            // if (list.id.slice(0, len) === below[0].id) return list;
         });
-        console.log(child);
+        console.log(child, 'child', behind);
         // let parentList = subMenu.category.filter(list => list.parent_id === item.id);
         setSubMenu({ category: MoveDown(subMenu.category, item, type, child, behind) })
     }
@@ -297,15 +327,26 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
         setInsertId([""]);
     }
     const addParent = () => {
+        // const parentList = subMenu.category.filter(list => list.parent_id === null);
+        // let a = parentList[parentList.length - 1].id.split('a');
+        // let id = 'a' + (parseInt(a[1]) + 1);
         const parentList = subMenu.category.filter(list => list.parent_id === null);
-        let a = parentList[parentList.length - 1].id.split('')
-        let id = a[0] + (parseInt(a[1]) + 1);
+        console.log(parentList)
+        let big=0;
+        parentList.map((item)=>{
+            if(parseInt(item.id.split('a')[1])>big) big=parseInt(item.id.split('a')[1]);
+        })
+        console.log(big)
+        // let a = big.split('a');      
+        // let id = 'a' + (parseInt(a[1]) + 1);
+        let id = 'a' + (big + 1);
         let parent = {
             id: id,
             name: "수정요망",
             parent_id: null,
             status: "show",
             order: subMenu.category.length + 1,
+            active: false,
             __typename: "categories2"
 
         }

@@ -26,6 +26,8 @@ interface IProps {
 const Category = () => {
   // const { submenu, selectedMenuId } = props;
   const [checkItem, setCheckItem] = useState({});
+  const [checkParentItem, setCheckParentItem] = useState({});
+  
   const [active, setActive] = useState({
     id:"", active:false
   });
@@ -71,12 +73,13 @@ const Category = () => {
     //   });
     // }
     // id.map(id=>  save({ variables: { id: id } }));
-    alert('저장완료');
+    alert('저장이 완료 되었습니다.');
   }
   
-const changeRight=(item)=>{
+  const changeRight=(item,parentItem)=>{
     setCheckItem(item);
-  };
+    setCheckParentItem(parentItem);
+  }
   const changeActive=(active,id)=>{
     console.log(active)
     setActive({active:active,id});
@@ -118,7 +121,7 @@ const changeRight=(item)=>{
             </ButtonBox>
           </AdminTableBox>
           <AdminAddFormBox>
-          <SettingRightBox item={checkItem} changeActive={changeActive} changeName={changeName}/>
+          <SettingRightBox item={checkItem} changeActive={changeActive} changeName={changeName} checkParentItem={checkParentItem}/>
             {/* <AdminAddForm /> */}
             {/* <ButtonBox>
                   <ButtonSpan>

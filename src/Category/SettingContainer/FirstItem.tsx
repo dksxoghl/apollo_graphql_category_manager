@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Box,InBox,UpSpan,DownSpan,DeleteSpan,SubAddSpan,NameSpan,ButtonSpan,OnlyCurrent } from './styles'
+import { Box,InBox,UpSpan,DownSpan,DeleteSpan,SubAddSpan,NameSpan,ButtonSpan, ButtonLine, ButtonLine2,InLine } from './styles'
 import plusImg from '../img/plus2.png';
 import end from '../img/end2.png';
 import minusImg from '../img/minus2.png';
@@ -58,7 +58,7 @@ function FirstItem({ item, onAdd, onHide, onRemove, orderChange, addSub, subMenu
   }
   const boxClick=()=>{
     setCurrent(item.id);
-    changeRight(item);
+    changeRight(item,subMenu.find(list=>list.id===item.parent_id));         //해당 클릭아이템의 부모아이템찾기(부모활성화 여부 판단)
   }
   let minus = '';
   //  item.id.length > 6? '----' : 
@@ -69,34 +69,32 @@ function FirstItem({ item, onAdd, onHide, onRemove, orderChange, addSub, subMenu
   }
  
   return (
-    <Box active={item.active} onClick={boxClick}  style={ {
-      backgroundColor: item.id===current ? '#eeeeee' : 'white'
+    <Box onClick={boxClick} style={{
+      backgroundColor: item.id === current ? '#eeeeee' : 'white'
     }}>
       {minus}
-     
-      {clicked?
-      <ButtonSpan onClick={handleClick}><img src={plusImg} height='15' /></ButtonSpan>:
-      imgStatus==='0'?
-      <ButtonSpan><img src={end} height='15' /></ButtonSpan>:
-      !clicked?
-      <ButtonSpan onClick={handleHide}><img src={minusImg} height='15' /></ButtonSpan>:null
-}
+      <InLine active={item.active} >
+      {clicked ?
+        <ButtonSpan onClick={handleClick}><img src={plusImg} height='15' /></ButtonSpan> :
+        imgStatus === '0' ?
+          <ButtonSpan><img src={end} height='15' /></ButtonSpan> :
+          !clicked ?
+            <ButtonSpan onClick={handleHide}><img src={minusImg} height='15' /></ButtonSpan> : null
+      }
+       <InBox ><NameSpan>{item.name}</NameSpan></InBox>
+       </InLine>
       {/* {input ? <input placeholder="한글영문숫자만, 10자내외" type="text" onKeyPress={appKeyPress} onChange={handleChange} /> : */}
-        <InBox ><NameSpan>{item.name}</NameSpan></InBox>
       {/* } */}
-       {item.id===current?
-      <span>
-      <UpSpan onClick={handleUp}><img src={triangle} height='11' /></UpSpan>
-      <DownSpan onClick={handleDown}><img src={downTriangle} height='11' /></DownSpan>
-      <DeleteSpan onClick={handleRemove}>선택삭제</DeleteSpan>
-      <SubAddSpan onClick={handleAddSub}>하위분류 추가</SubAddSpan>
-      </span>:null
-      //  <OnlyCurrent>
-      //  <DownSpan ><img src={downTriangle} height='11' /></DownSpan>
-      //  <UpSpan ><img src={triangle} height='11' /></UpSpan>
-      //  <DeleteSpan >선택삭제</DeleteSpan>
-      //  </OnlyCurrent>
-}
+      {item.id === current ?
+        <span>
+          <UpSpan onClick={handleUp}><img src={triangle} height='11' /></UpSpan>
+          <ButtonLine/>
+          <DownSpan onClick={handleDown}><img src={downTriangle} height='11' /></DownSpan>
+          <ButtonLine2/>
+          <DeleteSpan onClick={handleRemove}>선택삭제</DeleteSpan>
+          <SubAddSpan onClick={handleAddSub}>하위분류 추가</SubAddSpan>
+        </span> : null
+      }
     </Box>
 
   );
