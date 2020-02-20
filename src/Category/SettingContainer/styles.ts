@@ -35,7 +35,9 @@ export const CBox = styled.div`
 // display: inline-block; 
 export const Box = styled.div`
 border: 1px solid #dddddd; 
-
+border-top:0px;
+border-left:0px;
+border-right:0px;
 height: 35px;
 `;
 // ${({ active }) => active && `
@@ -47,7 +49,14 @@ margin:4px;
 text-align: left;
 width:130px;
 `;
-
+export const Line=styled.span`
+position: absolute;
+top:38px;
+left:0px;
+width: 380px;
+  height: 1px;
+  border: solid 0.1px #dddddd;
+`
 // background-color: ${props => {
 //   if (props) return '#249D3D';
 //   else return '#7B838B';

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import FirstItem from './FirstItem';
+import { Line } from './styles';
 
 function FirstMenu({ parentList, subMenu, onAdd, onRemove, onHide, orderChange, addSub, changeRight, current, setCurrent }) {
     const [a, setA] = useState();
@@ -40,7 +41,7 @@ function FirstMenu({ parentList, subMenu, onAdd, onRemove, onHide, orderChange, 
                 //         console.log(a,menu);
                 //     return <div key={item.id}><FirstItem item={item} onAdd={onAdd} menu={menu} /></div>
                 // }
-                return <div key={item.id}><FirstItem item={item}
+                return <div key={item.id}><Line/><FirstItem item={item}
                     onAdd={onAdd} onRemove={onRemove} onHide={onHide} orderChange={orderChange}
                     addSub={addSub} subMenu={subMenu} changeRight={changeRight} current={current} setCurrent={setCurrent} imgStatus={imgStatus}/></div>
             }
