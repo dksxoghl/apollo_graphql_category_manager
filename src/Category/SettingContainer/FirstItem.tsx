@@ -92,7 +92,8 @@ function FirstItem({ item, onAdd, onHide, onRemove, orderChange, addSub, subMenu
           <DownSpan onClick={handleDown}><img src={downTriangle} height='11' /></DownSpan>
           <ButtonLine2/>
           <DeleteSpan onClick={handleRemove}>선택삭제</DeleteSpan>
-          <SubAddSpan onClick={handleAddSub}>하위분류 추가</SubAddSpan>
+          {item.id.split(':').length>=3?null :<SubAddSpan onClick={handleAddSub}>하위분류 추가</SubAddSpan>}
+          {/* <SubAddSpan onClick={handleAddSub}>하위분류 추가</SubAddSpan>                         무한depth하게 하려면 주석해제         */}
         </span> : null
       }
     </Box>

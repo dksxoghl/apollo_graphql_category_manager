@@ -37,6 +37,7 @@ position: absolute;
 top:1.5px;
  line-height : normal; /* line-height 초기화 */ 
   font-family: inherit; /* 폰트 상속 */ border: 1px solid #dddddd; 
+  border:0px;
   border-radius:5; /* iSO 둥근모서리 제거 */
    outline-style: none;
    /* 포커스시 발생하는 효과 제거를 원한다면 */ 

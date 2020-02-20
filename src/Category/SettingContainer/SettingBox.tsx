@@ -86,10 +86,14 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
     }, [handleName]);
     useEffect(() => {
         if (active.id === undefined) return;
+        let aId= active.id+':';
         setSubMenu({
             category: subMenu.category.map(list => {
                 if (active.id.length === 0) return list;
-                if (list.id.slice(0, active.id.length) === active.id) {
+                if (list.id.slice(0, active.id.length+1) === aId) {                       
+                    return ({ ...list, active: active.active });
+                }
+                if (list.id === active.id) {                         
                     return ({ ...list, active: active.active });
                 }
                 return list;
@@ -127,34 +131,34 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
         if (type && subMenu.category[item.order - 2].id === item.parent_id) {       //위로갈때 
             return alert('같은 그룹 내에서만 이동이 가능합니다.');
         }
-       
+
         if (!type) { //아래로갈때
             let x, y;
             x = subMenu.category[item.order].id.split(':');
             y = item.id.split(':');
-            if( x.length < y.length)
-            return alert('같은 그룹 내에서만 이동이 가능합니다.');
+            if (x.length < y.length)
+                return alert('같은 그룹 내에서만 이동이 가능합니다.');
         }
         // if (!type && subMenu.category[item.order].id.length < item.id.length) { //아래로갈때
         //     return alert('같은 그룹끼리만 이동가능');
         // }
         let child = subMenu.category.filter(list => {
             let len = item.id.length;
-            if(list.id===item.id) return list;
-            if (list.id.slice(0, len+1) === (item.id+':')) return list;
+            if (list.id === item.id) return list;
+            if (list.id.slice(0, len + 1) === (item.id + ':')) return list;
         });
-       
+
         let below;
 
         if (!type) {                                        // 아래로갈때 다른 대 중분류일시 수정불가
-            below = subMenu.category.slice((item.order - 1) + child.length, (item.order - 1) + child.length + 1);                 
+            below = subMenu.category.slice((item.order - 1) + child.length, (item.order - 1) + child.length + 1);
             console.log(below);
             if (below.length < 1) return;
             let x, y;
-            x =  below[0].id.split(':');
+            x = below[0].id.split(':');
             y = item.id.split(':');
-            if( x.length < y.length)
-            return alert('같은 그룹 내에서만 이동이 가능합니다.');
+            if (x.length < y.length)
+                return alert('같은 그룹 내에서만 이동이 가능합니다.');
             // else if (!type && below[0].id.length < item.id.length) {
             //     return alert('같은 그룹d끼리만 이동가능');
             // }
@@ -245,13 +249,18 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
     const onRemove = (id) => {
         console.log(id);
         if (window.confirm('하위목록 다삭제됨')) {
-            subMenu.category.map((item) => {
-                if (id === item.id.slice(0, id.length)) { //선택된아이디랑 현재 상태에있는 목록아디 및 하위목록들 비교
-                    console.log(item.id.slice(0, id.length))
-                    let childDelete = subMenu.category.filter(i => i.id.slice(0, id.length) !== id);
-                    setSubMenu({ category: NewOrder(childDelete) });                                     //order재정렬
-                }
-            })
+            let dId = id + ':';
+            let childDelete = subMenu.category;
+            childDelete = childDelete.filter(i => i.id.slice(0, id.length + 1) !== dId);       //선택된아이디랑 현재 상태에있는 목록아디 및 하위목록들 비교  
+            childDelete = childDelete.filter(i => i.id !== id);
+            setSubMenu({ category: NewOrder(childDelete) });                                     //order재정렬
+            // subMenu.category.map((item) => {
+            //     if (id === item.id.slice(0, id.length)) { //선택된아이디랑 현재 상태에있는 목록아디 및 하위목록들 비교
+            //         console.log(item.id.slice(0, id.length))
+            //         let childDelete = subMenu.category.filter(i => i.id.slice(0, id.length) !== id);
+            //         setSubMenu({ category: NewOrder(childDelete) });                                     //order재정렬
+            //     }
+            // })
             setDeleteId(deleteId.concat(id));
             setInsertId(insertId.filter(insertId => insertId.slice(0, id.length) !== id))
         } else {
@@ -268,20 +277,22 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
                 newId += arr[index] + ':';
             }
             newId += endId;
+            parentList = parentList.concat(subMenu.category.filter(list => list.parent_id === parentList[parentList.length - 1].id));   //하위목록 추가시 제일아래목록에 추가 child있을시 고려.
         }
         else {
             newId = id + ':a0';
             parentList = subMenu.category.filter(list => list.id === id);
         }
         console.log(parentList);
-
+        let name =
+            newId.split(':').length === 2 ? '중_' : '소_';
         let parent = {
             id: newId,
-            name: "수정요망",
+            name: name,
             parent_id: id,
             status: "show",
             order: parentList[parentList.length - 1].order + 1,
-            active: false,
+            active: subMenu.category[parentList[parentList.length - 1].order - 1].active,               //바로 위항목의 활성화상태로 생성
             __typename: "categories2"
 
         }
@@ -301,12 +312,6 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
         setInsertId(insertId.concat(newId));
 
     }
-
-
-
-
-
-
     // for (const [key, value] of parentList.entries()) {
     //     menu.push( <FirstMenu parentList={parentList} onAdd={onAdd} />)
     //   }
@@ -332,9 +337,9 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
         // let id = 'a' + (parseInt(a[1]) + 1);
         const parentList = subMenu.category.filter(list => list.parent_id === null);
         console.log(parentList)
-        let big=0;
-        parentList.map((item)=>{
-            if(parseInt(item.id.split('a')[1])>big) big=parseInt(item.id.split('a')[1]);
+        let big = 0;
+        parentList.map((item) => {
+            if (parseInt(item.id.split('a')[1]) > big) big = parseInt(item.id.split('a')[1]);
         })
         console.log(big)
         // let a = big.split('a');      
@@ -342,16 +347,17 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
         let id = 'a' + (big + 1);
         let parent = {
             id: id,
-            name: "수정요망",
+            name: "대_",
             parent_id: null,
             status: "show",
             order: subMenu.category.length + 1,
-            active: false,
+            active: true,
             __typename: "categories2"
 
         }
         setSubMenu({ category: subMenu.category.concat(parent) });
         setInsertId(insertId.concat(id));
+
     }
 
     let menu = <FirstMenu parentList={parentList} subMenu={subMenu.category} onAdd={onAdd} onRemove={onRemove} onHide={onHide} orderChange={orderChange}
