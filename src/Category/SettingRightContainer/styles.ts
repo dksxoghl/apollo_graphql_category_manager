@@ -35,6 +35,7 @@ width: 392px; /* 원하는 너비 설정 */
 height: 32px; /* 높이값 초기화 */
 position: absolute;
 top:1.5px;
+margin-left:5px;
  line-height : normal; /* line-height 초기화 */ 
   font-family: inherit; /* 폰트 상속 */ border: 1px solid #dddddd; 
   border:0px;

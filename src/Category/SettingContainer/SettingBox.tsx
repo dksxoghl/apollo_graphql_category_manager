@@ -1,17 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import FirstMenu from './FirstMenu';
 import { CBox } from './styles';
-import {
-    Container,
-    TitleBox,
-    ContentBox,
-    Title,
-    UnderLine,
-    AdminAddFormBox,
-    AdminTableBox,
-    ButtonSpan,
-    ButtonBox
-} from "../styles";
 import { ParentAddSpan, SaveSpan } from './styles';
 import { MoveDown } from './MoveDown';
 import NewOrder from './NewOrder';
@@ -28,42 +17,6 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
     let parentList = categories.filter(list => list.parent_id === null);
     const [current, setCurrent] = useState("");
 
-    // const addChild=(id)=>{
-    //     // if(id!==index) return m.nodes[index];
-    //     let parentList = categories.filter(list => list.parent_id === id);
-    //     // return  initializedСopy(parentList);    
-    //     const nodesCopy = [{}];
-    //     for (let i = 0; i < parentList.length; i++) {
-    //         nodesCopy[i] = { 
-    //                          id: parentList[i].id,
-    //                          name: parentList[i].name,
-    //                          parent_id: parentList[i].parent_id,
-    //                          child: addChild(selectID),
-    //                  };
-    //       }
-    //     return nodesCopy;
-    // }
-    // const initializedСopy=(parentList)=>{
-    //     console.log(parentList)
-    //     const nodesCopy = [{}];
-    //     let child;
-    //     for (let i = 0; i < parentList.length; i++) {
-    //         // if(parentList[i].id===selectID){
-    //             if(selectID!=="") child=addChild(selectID);
-    //         // }
-    //         nodesCopy[i] = { 
-    //                          id: parentList[i].id,
-    //                          name: parentList[i].name,
-    //                          parent_id: parentList[i].parent_id,
-    //                          child: child,
-    //                  };
-    //                  child=[{}];      
-    //       }
-    //     return nodesCopy;
-    // }
-    // const [m, setM] = useState({
-    //     nodes: initializedСopy(parentList),
-    // });
 
     useEffect(() => {
         if (handleName.id === undefined) { return; }
@@ -99,17 +52,7 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
                 return list;
             })
         })
-        // if (parentList.length > 1) {
-        //     let b = true;     //이미 추가된 목록이라면 추가불가
-        //     subMenu.category.map((item) => {
-        //         if (item.parent_id === selectID) b = false;
-        //     })
-
-        //     if (b) (
-        //         setSubMenu({ category: subMenu.category.concat(parentList) })
-        //     )
-        // }
-        // //  setSubMenu(old=>[...old,parentList]); 
+      
         console.log('활성화변경');
     }, [active]);
 
@@ -199,14 +142,10 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
             // if (list.id.slice(0, len) === below[0].id) return list;
         });
         console.log(child, 'child', behind);
-        // let parentList = subMenu.category.filter(list => list.parent_id === item.id);
         setSubMenu({ category: MoveDown(subMenu.category, item, type, child, behind) })
     }
     const onAdd = (id) => {
         console.log(id);
-        // const sub= subMenu.category
-        // parentList.map((item)=>{
-        // subMenu.category.concat(item);
         setSubMenu({
             category: subMenu.category.map(list => {
                 if (list.parent_id === id) {
@@ -216,12 +155,6 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
                 return list;
             })
         })
-
-        // })
-        // setSelectID(id);
-        // menu.push( <FirstMenu parentList={parentList} onAdd={onAdd} />)
-        // m.push(<div>aa</div>);
-        //    setM()
     }
     const onHide = (id) => {
         console.log(id);
@@ -360,7 +293,7 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
 
     }
 
-    let menu = <FirstMenu parentList={parentList} subMenu={subMenu.category} onAdd={onAdd} onRemove={onRemove} onHide={onHide} orderChange={orderChange}
+    let menu = <FirstMenu  subMenu={subMenu.category} onAdd={onAdd} onRemove={onRemove} onHide={onHide} orderChange={orderChange}
         addSub={addSub} changeRight={changeRight} current={current} setCurrent={setCurrent}
     />;
     return (

@@ -51,7 +51,7 @@ width:130px;
 `;
 export const Line=styled.span`
 position: absolute;
-top:38px;
+top:0px;
 left:0px;
 width: 380px;
   height: 1px;
@@ -82,20 +82,6 @@ export const ParentAddSpan = styled.span`
   }
   width:150%;
 `;
-// export const Box = styled.div`
-// border: 1px solid #dddddd; 
-
-// height: 35px;
-// `;
-// // ${({ active }) => active && `
-// //   opacity:0.3;
-// //   `}
-// export const InBox = styled.div`
-// display: inline-block; 
-// margin:4px;
-// text-align: left;
-// width:130px;
-// `;
 
 export const InLine = styled.span<IProps>`
 opacity:${props => props.active ? 1.0 : 0.3};
@@ -107,15 +93,7 @@ opacity:${props => props.active ? 1.0 : 0.3};
 
 
 
-// export const ParentAddButtonBox = styled.div`
-// text-align: center;
-//   position: absolute;
-//   right: 0;
-//   bottom: 0;
-//   display: flex;
-//   padding-bottom: 10px;
 
-// `;
 export const SaveSpan = styled.span`
 position: absolute;
 left:810px;

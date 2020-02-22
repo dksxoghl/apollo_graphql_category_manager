@@ -9,7 +9,6 @@ import checkFalse from '../img/checkFalse.png';
 import checkTrue from '../img/checkTrue.png';
 
 function SettingRightBox({  item, changeActive, changeName, checkParentItem }) {
-    const [name, setName] = useState("");
     const [check, setCheck] = useState(false);
     const [value, setValue] = useState('');
 
@@ -24,7 +23,7 @@ function SettingRightBox({  item, changeActive, changeName, checkParentItem }) {
         }
     }, [item])
 
-    const deny_char = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]{1,10}$/;
+    const deny_char = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|/_\*]{1,10}$/;
     const appKeyPress = (e) => {
         if (e.key === 'Enter') {
             if (value === "") return alert('1자이상 입력하시오');
@@ -58,7 +57,7 @@ function SettingRightBox({  item, changeActive, changeName, checkParentItem }) {
         <div>
             <Line />
             <RightBoxTitle>카테고리명</RightBoxTitle>
-            <Input type="text" placeholder="입력 후 Enter키를 입력해주세요" value={value}
+            <Input type="text" placeholder="입력 후 Enter를 눌러주세요" value={value}
                 onKeyPress={appKeyPress} onChange={handleChangeName}></Input>
             <Line />
             <RightBoxTitle>활성화 상태</RightBoxTitle>
