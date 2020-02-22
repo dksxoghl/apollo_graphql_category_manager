@@ -49,7 +49,7 @@ margin:4px;
 text-align: left;
 width:130px;
 `;
-export const Line=styled.span`
+export const Line = styled.span`
 position: absolute;
 top:0px;
 left:0px;
@@ -70,7 +70,6 @@ export const ParentAddSpan = styled.span`
     border-color: #3a485c;
     width: 378px;
   height: 38px;
-
   font-family: NanumBarunGothic;
   font-size: 13px;
   font-weight: normal;
@@ -103,7 +102,6 @@ top:450px;
     border-color: #3a485c;
     width: 130px;
   height: 40px;
- 
   font-family: NanumBarunGothic;
   font-size: 13px;
   font-weight: normal;
@@ -122,6 +120,9 @@ top:425px;
 left:5px;
     width: 50px;
   height: 40px;
+  :hover{
+    cursor: pointer;
+  }
   }
 `;
 export const DownSpan = styled.span`
@@ -130,6 +131,9 @@ top:425px;
 left:40px;
     width: 50px;
   height: 40px;
+  :hover{
+    cursor: pointer;
+  }
   }
 `;
 export const DeleteSpan = styled.span`
@@ -141,15 +145,21 @@ height: 26px;
 border-radius: 3px;
 background-color: #65727f;
 text-align: center;
-padding:3px;
 font-family: NanumBarunGothic;
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
-  letter-spacing: -0.17px;
   color: #ffffff;
+  padding:2 px;
+margin-left: auto;
+margin-right: auto;
+margin-bottom:5px;
+padding-top:5px;
+:hover{
+  cursor: pointer;
+}
   }
 `;
 export const SubAddSpan = styled.span`
@@ -197,7 +207,7 @@ export const OnlyCurrent = styled.span`
 opacity: 0.1
 `;
 
-export const ButtonLine=styled.span`
+export const ButtonLine = styled.span`
 position: absolute;
 top:420px;
 left:30px;
@@ -205,7 +215,7 @@ width: 1px;
   height: 35px;
   border: solid 1px #dddddd;
 `
-export const ButtonLine2=styled.span`
+export const ButtonLine2 = styled.span`
 position: absolute;
 top:420px;
 left:68px;

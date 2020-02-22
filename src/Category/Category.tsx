@@ -45,12 +45,7 @@ const Category = () => {
   if (loading) return <p>'Loading...'</p>;
   if (error) return <p>`Error! ${error.message}`</p>;
   const categories = data.categories;
-  // const onChange = (e) => {
-  //   // console.log(`checked = ${e.target.checked}`,e,e.target,e.target.onFocus);
-  //   console.log('ccclick', e);
-  //   setCheckId(oldArray => [...oldArray, e.key]);
-  // }
-  // console.log(checkId);
+  
   const onSave = (changedList, deleteId,insertId) => {
     console.log(changedList, deleteId,insertId);
     let newInsertId=insertId.slice(1,insertId.length);
@@ -101,35 +96,12 @@ const Category = () => {
             {/* <AdminTable /> */}
             {/* <SettingContainer categories={categories} onChange={onChange} /> */}
             <SettingBox categories={categories} onSave={onSave} changeRight={changeRight} active={active} handleName={handleName}/>
-            <ButtonBox>
-              {/* <ButtonSpan>
-                    <Button type="primary" htmlType="submit">
-                      대분류추가
-                  </Button>
-                  </ButtonSpan> */}
-              {/* <ButtonSpan>
-                    <Button type="primary" htmlType="submit">
-                      수정
-                  </Button>
-                  </ButtonSpan>
-
-                  <ButtonSpan>
-                    <Button type="primary" htmlType="submit">
-                      삭제
-                  </Button>
-                  </ButtonSpan> */}
-            </ButtonBox>
+           
           </AdminTableBox>
           <AdminAddFormBox>
+
           <SettingRightBox item={checkItem} changeActive={changeActive} changeName={changeName} checkParentItem={checkParentItem}/>
-            {/* <AdminAddForm /> */}
-            {/* <ButtonBox>
-                  <ButtonSpan>
-                    <Button type="primary" htmlType="submit" onClick={onSave}>
-                      저장
-                  </Button>
-                  </ButtonSpan>
-                </ButtonBox> */}
+          
           </AdminAddFormBox>
         </ContentBox>
       </Container>
