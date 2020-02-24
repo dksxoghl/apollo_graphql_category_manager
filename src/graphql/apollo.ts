@@ -1,13 +1,23 @@
 import ApolloClient from 'apollo-client';
 import { InMemoryCache } from "apollo-cache-inmemory";
-import { createHttpLink,HttpLink  } from "apollo-link-http";
+import { RestLink } from 'apollo-link-rest';
 
-const link = createHttpLink({ uri: "https://apollo-category.herokuapp.com/v1/graphql",
-// headers: {"x-hasura-admin-secret":"1234"}
+const restLink = new RestLink({
+    uri: "/",
+    // headers: {
+    //     "Content-Type": "application/x-www-form-urlencoded"   //default json
+    // },
+    // defaultSerializer: (data: any, headers: Headers) => {
+    //     const formData = new FormData();
+    //     for (let key in body) {
+    //         formData.append(key, body[key]);
+    //     }
+    //     headers.set("Content-Type", "x-www-form-encoded")
+    //     return { body: formData, headers };
+    // }
 });
-// link: "http://121.134.238.182:26060/console",
 export const client = new ApolloClient({
-    link,
+    link: restLink,
     cache: new InMemoryCache(),
 });
 

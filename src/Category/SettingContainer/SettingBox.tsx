@@ -15,8 +15,6 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
         category: categories
     });
     const [current, setCurrent] = useState("");
-
-
     useEffect(() => {
         if (handleName.id === undefined) { return; }
         let parentList = subMenu.category.filter(list => list.parent_id === handleName.parent_id);
@@ -55,7 +53,7 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
         console.log('활성화변경');
     }, [active]);
 
-
+    console.log(subMenu.category);
     // const updateName = (item, value) => {
     //     console.log(item, value);
     //     setSubMenu({
@@ -278,12 +276,7 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
     return (
         <div>
             <CBox>
-
-                {/* <FirstMenu parentList={m.nodes} onAdd={onAdd} /> */}
-                {/* {menu&&menu} */}
-                {/* {m} */}
                 {menu}
-                {/* {addChild} */}
             </CBox>
 
             <ParentAddSpan>
