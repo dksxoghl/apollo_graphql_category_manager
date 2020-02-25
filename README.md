@@ -68,7 +68,7 @@ graphql graphql-tag typescript styled-components
 <img src="https://user-images.githubusercontent.com/45805470/75227619-d9bd0600-57f1-11ea-89f2-07c35d851f39.PNG" width="60%"></img></br>
 
 
-- rollback design(branch feature_design) : (u can go back to this design)
+- rollback design(branch feature_rollback) : (u can go back to this design)
 <img src="https://user-images.githubusercontent.com/45805470/75227877-5d76f280-57f2-11ea-9bbd-9a902192b158.PNG" width="60%"></img>
 
 
