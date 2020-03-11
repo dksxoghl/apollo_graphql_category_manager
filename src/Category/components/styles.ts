@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 // palevioletred
 // display: flex;
 interface IProps {
@@ -6,29 +6,7 @@ interface IProps {
 }
 // margin: 3%;
 // height: 400px;
-export const CBox = styled.div`
-  justify-content: center;
-  height: 400px;
-  overflow:scroll;
-  flex: 1;
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  /* Track */
-::-webkit-scrollbar-track {
-  background: #eeee; 
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #eeee; 
-}
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555; 
-}
-`;
 // border-radius: 3px;
 //   border: 1px solid;
 
@@ -62,25 +40,6 @@ width: 380px;
 //   else return '#7B838B';
 // }};
 
-export const ParentAddSpan = styled.span`
-  position: absolute;
-  top:380px;
-  .ant-btn-primary {
-    background-color: #3a485c;
-    border-color: #3a485c;
-    width: 378px;
-  height: 38px;
-  font-family: NanumBarunGothic;
-  font-size: 13px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: -0.19px;
-  color: #ffffff;
-  }
-  width:150%;
-`;
 
 export const InLine = styled.span<IProps>`
 opacity:${props => props.active ? 1.0 : 0.3};
@@ -93,27 +52,7 @@ opacity:${props => props.active ? 1.0 : 0.3};
 
 
 
-export const SaveSpan = styled.span`
-position: absolute;
-left:810px;
-top:450px;
-.ant-btn-primary {
-    background-color: #3a485c;
-    border-color: #3a485c;
-    width: 130px;
-  height: 40px;
-  font-family: NanumBarunGothic;
-  font-size: 13px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: -0.19px;
-  color: #ffffff;
-  }
-  width:150%;
-  
-`;
+
 export const UpSpan = styled.span`
 position: absolute;
 top:425px;

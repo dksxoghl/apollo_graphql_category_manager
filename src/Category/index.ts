@@ -1,3 +1,3 @@
-import Category from "./Category";
+import Category from "./containers/Category";
 
 export default Category

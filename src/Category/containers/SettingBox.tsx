@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import FirstMenu from './FirstMenu';
-import { CBox } from './styles';
-import { ParentAddSpan, SaveSpan } from './styles';
-import { MoveDown } from './MoveDown';
-import NewOrder from './NewOrder';
+import FirstMenu from '../components/Menu';
+import { CBox ,SaveSpan,ParentAddSpan} from './styles';
+import { MoveDown } from '../components/MoveDown';
+import NewOrder from '../components/NewOrder';
 
 function SettingBox({ categories, onSave, changeRight, active, handleName }) {
     console.log(categories)
@@ -11,7 +10,6 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
     const [deleteId, setDeleteId] = useState([""]);
     const [insertId, setInsertId] = useState([""]);
     const [subMenu, setSubMenu] = useState({
-        // category: parentList
         category: categories
     });
     const [current, setCurrent] = useState("");
@@ -34,7 +32,6 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
                 return list;
             })
         })
-        console.log('이름변경')
     }, [handleName]);
     useEffect(() => {
         if (active.id === undefined) return;
@@ -51,8 +48,6 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
                 return list;
             })
         })
-      
-        console.log('활성화변경');
     }, [active]);
 
 
@@ -208,7 +203,6 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
             newId = id + ':a0';
             parentList = subMenu.category.filter(list => list.id === id);
         }
-        console.log(parentList);
         let name =
             newId.split(':').length === 2 ? '중_' : '소_';
         let parent = {
@@ -248,12 +242,10 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
         // let a = parentList[parentList.length - 1].id.split('a');
         // let id = 'a' + (parseInt(a[1]) + 1);
         const parentList = subMenu.category.filter(list => list.parent_id === null);
-        console.log(parentList)
         let big = 0;
         parentList.map((item) => {
             if (parseInt(item.id.split('a')[1]) > big) big = parseInt(item.id.split('a')[1]);
         })
-        console.log(big)
         // let a = big.split('a');      
         // let id = 'a' + (parseInt(a[1]) + 1);
         let id = 'a' + (big + 1);
@@ -278,14 +270,8 @@ function SettingBox({ categories, onSave, changeRight, active, handleName }) {
     return (
         <div>
             <CBox>
-
-                {/* <FirstMenu parentList={m.nodes} onAdd={onAdd} /> */}
-                {/* {menu&&menu} */}
-                {/* {m} */}
                 {menu}
-                {/* {addChild} */}
             </CBox>
-
             <ParentAddSpan>
                 <button className='ant-btn-primary' onClick={addParent}>
                     +대분류 추가하기

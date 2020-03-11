@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Box,InBox,UpSpan,DownSpan,DeleteSpan,SubAddSpan,NameSpan,ButtonSpan, ButtonLine, ButtonLine2,InLine } from './styles'
 import plusImg from '../img/plus2.png';
 import end from '../img/end2.png';
@@ -7,11 +7,11 @@ import triangle from '../img/triangle.png';
 import downTriangle from '../img/triangle-copy.png';
 
 
-function FirstItem({ item, onAdd, onHide, onRemove, orderChange, addSub, subMenu ,changeRight,current,setCurrent,imgStatus}) {
+function FirstItem({  item,imgStatus,subMenu,...args}) {
   // const [input, setInput] = useState(false);
   // const [value, setValue] = useState('');
+  const {current,setCurrent,onAdd,onRemove,onHide,orderChange,addSub,changeRight}={...args} as any;
   const [clicked,setClicked] = useState(imgStatus==='+'? true:false);             // 이미지 결정 state
-  console.log(current);
   const handleClick = () => {
     setClicked(false);
     onAdd(item.id);
@@ -61,8 +61,6 @@ function FirstItem({ item, onAdd, onHide, onRemove, orderChange, addSub, subMenu
     changeRight(item,subMenu.find(list=>list.id===item.parent_id));         //해당 클릭아이템의 부모아이템찾기(부모활성화 여부 판단)
   }
   let minus = '';
-  //  item.id.length > 6? '----' : 
-  //  item.id.length>4 ? '--' :null  ;
   let split = item.id.split(':');
   for (let index = 0; index < split.length - 1; index++) {
     minus += '\u00A0\u00A0\u00A0\u00A0\u00A0';
@@ -103,5 +101,3 @@ function FirstItem({ item, onAdd, onHide, onRemove, orderChange, addSub, subMenu
 }
 
 export default FirstItem;
-
-//내일업다운수정

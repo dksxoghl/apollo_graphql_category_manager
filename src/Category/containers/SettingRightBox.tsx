@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
 import {
-
     RightBoxTitle, Line, Input, Span
 } from "./styles";
 import { useState } from 'react';
@@ -16,7 +15,7 @@ function SettingRightBox({  item, changeActive, changeName, checkParentItem }) {
         if (item.id === undefined) {
             setValue("");
             setCheck(false);
-            console.log(item, '아이템초기화')
+            // console.log(item, '아이템초기화')
         } else {
             setValue(item.name);
             setCheck(item.active);
